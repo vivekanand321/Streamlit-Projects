@@ -1,398 +1,381 @@
-# 🚀 Streamlit Project with UV Package Manager
+# 🚀 Streamlit Project Collection with UV Package Manager
 
-A complete Python project setup using `uv` - the fastest Python package manager, featuring a demo Streamlit application with pandas and numpy.
+A comprehensive collection of Streamlit applications demonstrating various features and capabilities, managed with UV - the fastest Python package manager.
 
 ## 📋 Table of Contents
 
+- [Project Overview](#project-overview)
+- [Applications Overview](#applications-overview)
 - [What is UV?](#what-is-uv)
 - [Prerequisites](#prerequisites)
 - [Installation Guide](#installation-guide)
 - [Project Setup](#project-setup)
-- [Running the Demo](#running-the-demo)
+- [Running the Applications](#running-the-applications)
+- [Project Structure](#project-structure)
 - [Development Workflow](#development-workflow)
+- [Features Demonstrated](#features-demonstrated)
 - [Common Commands](#common-commands)
 - [Troubleshooting](#troubleshooting)
 
+## 🎯 Project Overview
+
+This project showcases multiple Streamlit applications, each demonstrating different aspects of web app development with Python. From simple data visualization to interactive dashboards and real-time API integration, this collection serves as a learning resource and practical examples for Streamlit development.
+
+### Key Technologies:
+- **Streamlit** - Web app framework
+- **Pandas** - Data manipulation and analysis
+- **NumPy** - Numerical computing
+- **UV** - Modern Python package manager
+- **Pre-commit hooks** - Code quality assurance
+
+## 📱 Applications Overview
+
+### 1. **Main Demo App** (`app.py`)
+- **Purpose**: UV setup verification and basic Streamlit features
+- **Features**: Sample data analysis, charts, package version display
+- **Tech**: Pandas, NumPy, Streamlit
+
+### 2. **Coffee Maker App** (`app2.py`)
+- **Purpose**: Interactive form controls and user input handling
+- **Features**: Buttons, checkboxes, radio buttons, sliders, date inputs
+- **Use Case**: Order customization interface
+
+### 3. **Chai Taste Poll** (`app3.py`)
+- **Purpose**: Voting system with images and sidebar controls
+- **Features**: Image display, voting buttons, sidebar inputs, expandable sections
+- **Use Case**: Interactive polling application
+
+### 4. **Chai Sales Dashboard** (`app4.py`)
+- **Purpose**: File upload and data analysis
+- **Features**: CSV file upload, data preview, summary statistics, filtering
+- **Use Case**: Data analysis tool
+
+### 5. **Live Currency Converter** (`app5.py`)
+- **Purpose**: Real-time API integration
+- **Features**: External API calls, live currency conversion
+- **Use Case**: Financial tool with real-time data
+
+### 6. **Advanced Sales Dashboard** (`demo-dashboard.py`)
+- **Purpose**: Comprehensive business dashboard
+- **Features**: KPI metrics, interactive charts, data filtering, responsive layout
+- **Use Case**: Business intelligence dashboard
+
 ## 🤔 What is UV?
 
-`uv` is a modern, extremely fast Python package and project manager written in Rust. It replaces multiple traditional Python tools:
-
-- **Package management** (like pip)
-- **Virtual environment creation** (like venv/virtualenv)
-- **Python version management** (like pyenv)
-- **Project management** (like poetry)
-- **Dependency resolution and locking** (like pip-tools)
+`uv` is a modern, extremely fast Python package and project manager written in Rust. It replaces multiple traditional Python tools and provides significant performance improvements.
 
 ### Key Benefits:
 - ⚡ **10-100x faster** than pip
-- 🔧 **All-in-one tool** - replaces multiple tools
-- 🐍 **No Python dependency** - can be installed without Python
+- 🔧 **All-in-one tool** - replaces pip, venv, pyenv, poetry
+- 🐍 **No Python dependency** - can install Python itself
 - 🔒 **Lock files** for reproducible environments
 - 🌍 **Cross-platform** support
+- 📦 **Better dependency resolution**
+
+### Traditional vs UV Workflow:
+```bash
+# Traditional approach
+python -m venv .venv
+source .venv/bin/activate
+pip install streamlit pandas numpy
+pip freeze > requirements.txt
+
+# UV approach
+uv venv
+uv add streamlit pandas numpy
+# Lock file automatically created!
+```
 
 ## 📋 Prerequisites
 
-- **macOS/Linux/Windows** operating system
+- **Operating System**: macOS, Linux, or Windows
 - **Internet connection** for downloading packages
 - **Terminal/Command Prompt** access
 
-> **Note**: You don't need Python pre-installed! UV can install Python for you.
+> **Note**: Python installation is optional! UV can install and manage Python versions for you.
 
 ## 🛠 Installation Guide
 
-### Step 1: Check if UV is Already Installed
-
-```bash
-# Check if uv is installed
-uv --version
-```
-
-If you see a version number, UV is already installed. Skip to [Project Setup](#project-setup).
-
-### Step 2: Install UV
+### Step 1: Install UV
 
 #### For macOS and Linux:
-
-**Option 1: Official Installer (Recommended)**
 ```bash
+# Official installer (recommended)
 curl -LsSf https://astral.sh/uv/install.sh | sh
-```
 
-**Option 2: Using Homebrew (macOS)**
-```bash
+# Using Homebrew (macOS)
 brew install uv
 ```
 
 #### For Windows:
-
-**PowerShell:**
 ```powershell
+# PowerShell
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### Step 3: Add UV to PATH
-
-After installation, add UV to your PATH:
-
-```bash
-# For bash/zsh users
-source $HOME/.local/bin/env
-
-# Or restart your terminal
-```
-
-### Step 4: Verify Installation
-
+### Step 2: Verify Installation
 ```bash
 uv --version
-# Should output: uv 0.7.17 (or newer)
+# Expected output: uv 0.4.x or newer
 ```
+
+### Step 3: Restart Terminal
+Close and reopen your terminal to ensure UV is in your PATH.
 
 ## 🏗 Project Setup
 
-### Step 1: Clone or Create Project
+### Method 1: Clone Existing Project
 
-If cloning this repository:
 ```bash
-git clone <repository-url>
+# Clone the repository
+git clone <your-repository-url>
 cd streamlit-project
+
+# Create and activate virtual environment
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies from lock file
+uv sync
+
+# Or install manually if needed
+uv add streamlit pandas numpy requests
 ```
 
-If creating from scratch:
+### Method 2: Create New Project from Scratch
+
 ```bash
-# Create new project
+# Initialize new project
 uv init streamlit-project
 cd streamlit-project
+
+# Add dependencies
+uv add streamlit pandas numpy requests
+
+# Add development dependencies
+uv add --dev pre-commit black flake8 isort
+
+# Create your first app
+echo 'import streamlit as st
+st.title("Hello Streamlit!")
+st.write("Your app is running!")' > app.py
 ```
 
-### Step 2: Create Virtual Environment
+## 🎮 Running the Applications
 
+### Quick Start (Recommended)
 ```bash
-# Create virtual environment
-uv venv
-
-# You should see output like:
-# Using CPython 3.9.6 interpreter at: /usr/bin/python3
-# Creating virtual environment at: .venv
-# Activate with: source .venv/bin/activate
+# Run any app using uv (automatically handles virtual environment)
+uv run streamlit run app.py        # Main demo
+uv run streamlit run app2.py       # Coffee maker
+uv run streamlit run app3.py       # Chai poll
+uv run streamlit run app4.py       # Sales dashboard
+uv run streamlit run app5.py       # Currency converter
+uv run streamlit run demo-dashboard.py  # Advanced dashboard
 ```
 
-### Step 3: Activate Virtual Environment
-
+### Traditional Method
 ```bash
-# Activate the virtual environment
-source .venv/bin/activate
+# Activate virtual environment first
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Windows users:
-# .venv\Scripts\activate
-
-# You should see (streamlit-project) in your prompt
-```
-
-### Step 4: Install Dependencies
-
-```bash
-# Install project dependencies
-uv add streamlit pandas numpy
-
-# This will install:
-# - streamlit (web app framework)
-# - pandas (data manipulation)
-# - numpy (numerical computing)
-# - Plus ~33 additional required packages
-```
-
-### Step 5: Verify Installation
-
-```bash
-# Test that packages are installed correctly
-python -c "import pandas as pd; import numpy as np; import streamlit as st; print('✅ All packages imported successfully!')"
-```
-
-## 🎯 Running the Demo
-
-### Method 1: Direct Streamlit Command
-
-```bash
-# Make sure virtual environment is activated
-source .venv/bin/activate
-
-# Run the Streamlit app
+# Then run any app
 streamlit run app.py
-```
-
-### Method 2: Using UV Run (Recommended)
-
-```bash
-# UV automatically handles the virtual environment
-uv run streamlit run app.py
+streamlit run app2.py
+streamlit run app3.py
+streamlit run app4.py
+streamlit run app5.py
+streamlit run demo-dashboard.py
 ```
 
 ### Expected Output:
-
 ```
 You can now view your Streamlit app in your browser.
 
   Local URL: http://localhost:8501
-  Network URL: http://192.168.1.100:8501
-```
-
-The demo app will open in your browser and display:
-- 📊 Sample data analysis with pandas
-- 📈 Interactive charts
-- 📋 Package version information
-- ✅ Confirmation that all packages work correctly
-
-## 🔄 Development Workflow
-
-### Adding New Dependencies
-
-```bash
-# Add regular dependencies
-uv add requests matplotlib seaborn
-
-# Add development dependencies (testing, linting, etc.)
-uv add --dev pytest black flake8
-
-# Add specific version
-uv add "pandas>=2.0.0"
-```
-
-### Running Scripts
-
-```bash
-# Method 1: Traditional activation
-source .venv/bin/activate
-python your_script.py
-
-# Method 2: UV run (recommended)
-uv run python your_script.py
-
-# Method 3: With temporary dependencies
-uv run --with requests python script_needing_requests.py
-```
-
-### Project Maintenance
-
-```bash
-# Update all dependencies
-uv sync
-
-# List installed packages
-uv pip list
-
-# Show package information
-uv pip show streamlit
-
-# Export requirements
-uv pip freeze > requirements.txt
-```
-
-## 📚 Common Commands
-
-### Virtual Environment Management
-
-```bash
-# Create virtual environment
-uv venv
-
-# Create with specific Python version
-uv venv --python 3.11
-
-# Activate environment
-source .venv/bin/activate
-
-# Deactivate environment
-deactivate
-```
-
-### Dependency Management
-
-```bash
-# Add dependencies
-uv add package_name
-
-# Add multiple packages
-uv add pandas numpy matplotlib
-
-# Add development dependencies
-uv add --dev pytest black
-
-# Remove dependencies
-uv remove package_name
-
-# Install from requirements.txt
-uv pip install -r requirements.txt
-```
-
-### Project Management
-
-```bash
-# Initialize new project
-uv init my-project
-
-# Initialize package project
-uv init --package my-package
-
-# Sync dependencies with lock file
-uv sync
-
-# Run commands in project environment
-uv run python script.py
-uv run streamlit run app.py
-```
-
-### Python Version Management
-
-```bash
-# List available Python versions
-uv python list
-
-# Install specific Python version
-uv python install 3.11
-
-# Pin project to specific version
-uv python pin 3.11
-```
-
-## 🔧 Troubleshooting
-
-### Common Issues and Solutions
-
-#### 1. "command not found: uv"
-```bash
-# Solution: Add UV to PATH or restart terminal
-source $HOME/.local/bin/env
-# OR restart your terminal
-```
-
-#### 2. "command not found: streamlit"
-```bash
-# Solution: Activate virtual environment first
-source .venv/bin/activate
-streamlit run app.py
-
-# OR use uv run
-uv run streamlit run app.py
-```
-
-#### 3. Import errors in Python scripts
-```bash
-# Solution: Make sure virtual environment is activated
-source .venv/bin/activate
-
-# OR use uv run
-uv run python your_script.py
-```
-
-#### 4. Permission denied errors
-```bash
-# Solution: Check file permissions
-chmod +x script.py
-
-# Or run with python explicitly
-uv run python script.py
-```
-
-#### 5. Package conflicts
-```bash
-# Solution: Clear cache and reinstall
-uv cache clean
-uv sync
-```
-
-### Getting Help
-
-```bash
-# UV help
-uv --help
-
-# Specific command help
-uv add --help
-uv venv --help
-
-# Streamlit help
-uv run streamlit --help
+  Network URL: http://192.168.1.x:8501
 ```
 
 ## 📁 Project Structure
 
 ```
 streamlit-project/
-├── .venv/                 # Virtual environment (auto-generated)
-├── .git/                  # Git repository
-├── .gitignore            # Git ignore rules
-├── .python-version       # Python version specification
-├── README.md             # This file
-├── app.py                # Demo Streamlit application
-├── main.py               # Sample Python script
-├── pyproject.toml        # Project configuration and dependencies
-└── uv.lock              # Dependency lock file
+├── .git/                    # Git repository
+├── .venv/                   # Virtual environment (created by uv)
+├── .gitignore              # Git ignore patterns
+├── .pre-commit-config.yaml # Pre-commit hooks configuration
+├── .python-version         # Python version specification
+├── pyproject.toml          # Project configuration and dependencies
+├── uv.lock                 # Dependency lock file (like package-lock.json)
+├── README.md               # This file
+├── chai_sales.csv          # Sample data for dashboard apps
+├── app.py                  # Main demo app - UV setup verification
+├── app2.py                 # Coffee maker app - Form controls
+├── app3.py                 # Chai poll app - Images and voting
+├── app4.py                 # File upload dashboard
+├── app5.py                 # Currency converter - API integration
+├── demo-dashboard.py       # Advanced sales dashboard
+└── project-1.py           # Simple demo app
 ```
 
-## 🎯 Next Steps
+## 🔄 Development Workflow
 
-1. **Explore the Demo**: Run the Streamlit app and explore its features
-2. **Modify the Code**: Try editing `app.py` to add new features
-3. **Add Dependencies**: Install additional packages you need
-4. **Create New Scripts**: Build your own Python applications
-5. **Deploy**: Consider deploying your Streamlit app to the cloud
+### Adding New Dependencies
+```bash
+# Add production dependencies
+uv add matplotlib seaborn plotly
 
-## 📚 Additional Resources
+# Add development dependencies
+uv add --dev pytest black flake8
 
-- [UV Documentation](https://docs.astral.sh/uv/)
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [NumPy Documentation](https://numpy.org/doc/)
+# Add with version constraints
+uv add "pandas>=2.0.0"
+```
+
+### Managing Python Versions
+```bash
+# Install specific Python version
+uv python install 3.11
+
+# Use specific Python version for project
+uv python pin 3.11
+
+# Create venv with specific Python version
+uv venv --python 3.11
+```
+
+### Development Commands
+```bash
+# Install dependencies in development mode
+uv sync --dev
+
+# Run pre-commit hooks manually
+uv run pre-commit run --all-files
+
+# Update all dependencies
+uv lock --upgrade
+
+# Export requirements.txt (if needed for compatibility)
+uv export --format requirements-txt --output-file requirements.txt
+```
+
+## ✨ Features Demonstrated
+
+### Core Streamlit Components:
+- **Layout**: Columns, sidebars, containers, expanders
+- **Input Widgets**: Buttons, sliders, text inputs, file uploaders
+- **Display Elements**: Charts, dataframes, images, metrics
+- **Interactivity**: Forms, callbacks, session state
+
+### Data Handling:
+- **CSV Processing**: File upload and parsing
+- **Data Visualization**: Built-in charts and custom plots
+- **Real-time Data**: API integration and live updates
+- **Data Filtering**: Interactive data exploration
+
+### Advanced Features:
+- **Dashboard Design**: KPI metrics, responsive layouts
+- **Image Handling**: External image loading and display
+- **API Integration**: External service consumption
+- **Form Validation**: User input handling and validation
+
+## 🔧 Common Commands
+
+```bash
+# Project management
+uv init my-project           # Create new project
+uv add package-name          # Add dependency
+uv remove package-name       # Remove dependency
+uv sync                      # Install/update dependencies
+uv lock                      # Update lock file
+
+# Python management
+uv python list               # List available Python versions
+uv python install 3.11      # Install Python 3.11
+uv python pin 3.11          # Pin project to Python 3.11
+
+# Virtual environments
+uv venv                      # Create virtual environment
+uv venv --python 3.11       # Create with specific Python version
+
+# Running applications
+uv run python script.py     # Run Python script
+uv run streamlit run app.py # Run Streamlit app
+uv run pytest               # Run tests
+
+# Export formats
+uv export --format requirements-txt  # Export to requirements.txt
+uv tree                              # Show dependency tree
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues:
+
+1. **UV not found after installation**
+   ```bash
+   # Add UV to PATH manually
+   export PATH="$HOME/.local/bin:$PATH"
+   # Or restart terminal
+   ```
+
+2. **Permission errors on macOS/Linux**
+   ```bash
+   # Fix permissions
+   chmod +x ~/.local/bin/uv
+   ```
+
+3. **Dependencies not installing**
+   ```bash
+   # Clear cache and reinstall
+   uv cache clean
+   uv sync --reinstall
+   ```
+
+4. **Port already in use**
+   ```bash
+   # Run on different port
+   uv run streamlit run app.py --server.port 8502
+   ```
+
+5. **Pre-commit hooks failing**
+   ```bash
+   # Install pre-commit hooks
+   uv run pre-commit install
+
+   # Run hooks manually to fix issues
+   uv run pre-commit run --all-files
+   ```
+
+### Performance Tips:
+- Use `uv run` instead of activating virtual environment
+- Keep `uv.lock` file in version control for reproducible builds
+- Use `uv sync` instead of `uv add` when installing from existing lock file
+- Regular `uv cache clean` for disk space management
 
 ## 🤝 Contributing
 
-Feel free to contribute to this project by:
-- Reporting issues
-- Suggesting improvements
-- Adding new features
-- Improving documentation
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Run pre-commit hooks: `uv run pre-commit run --all-files`
+5. Commit changes: `git commit -m "Add feature"`
+6. Push to branch: `git push origin feature-name`
+7. Create a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🔗 Resources
+
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [UV Documentation](https://docs.astral.sh/uv/)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+- [Pre-commit Documentation](https://pre-commit.com/)
 
 ---
 
-**Happy coding! 🚀**
+**Happy Coding!** 🎉
+
+For questions or issues, please open an issue in the repository or reach out to the pandeyvivek203@gmail.com.
